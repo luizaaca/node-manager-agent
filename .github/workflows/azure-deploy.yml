@@ -7,7 +7,7 @@ on:
 
 env:
     NODE_VERSION: '22.x'
-    AZURE_WEBAPP_NAME: 'node-manager-agent'
+    AZURE_WEBAPP_NAME: 'node-manager-agent-api'
 
 jobs:
     build-and-deploy:
