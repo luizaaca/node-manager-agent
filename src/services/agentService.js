@@ -9,7 +9,6 @@ import db from "../database/db.js";
 
 const executeQueryTool = tool(
     async ({ query }) => {
-        console.log("Query tool received: ", query);
         const normalized = String(query ?? "")
             .trim()
             .toLowerCase();
@@ -27,7 +26,6 @@ const executeQueryTool = tool(
         }
         const dbAllPromisified = promisify(db.all.bind(db));
         const rows = await dbAllPromisified(query, []);
-        console.log("Query tool output: ", rows, "\n\n");
         return JSON.stringify(rows);
     },
     {
@@ -72,13 +70,15 @@ export const runAgent = async (userPrompt) => {
             step.model_request?.messages?.at(-1);
 
         if (latestMessage) {
-            console.log(`Pretty print da mensagem no step ${stepIndex}:`);
-            console.dir(latestMessage, { depth: null, colors: true })
-            console.log("\n"); // Quebra de linha
-
             if (latestMessage.content) {
                 response = latestMessage.content;
+            } else if (latestMessage.tool_calls) {
+                response = JSON.stringify(latestMessage.tool_calls)
             }
+            console.log(`Step ${stepIndex}:`);
+            console.dir(latestMessage.content, { depth: null, colors: true })
+            console.log("\n"); // Quebra de linha
+
         }
         stepIndex++;
     }
