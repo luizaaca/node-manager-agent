@@ -141,3 +141,5 @@ vite.config.ts.timestamp-*
 .vite/
 
 copilot.instructions.md
+
+src/database/northwind.db
