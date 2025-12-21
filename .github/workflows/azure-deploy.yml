@@ -24,13 +24,12 @@ jobs:
             cache: 'npm'
 
         - name: Install dependencies
-          run: npm ci --omit=dev --legacy-peer-deps
+          run: npm ci --legacy-peer-deps
 
         - name: Create deployment package
           run: |
             zip -r deploy.zip . \
             -x "*.git*" \
-            -x "*node_modules*" \
             -x "*.github*" \
             -x "*tests*" \
             -x "*.db*" \
