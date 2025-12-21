@@ -70,13 +70,14 @@ export const runAgent = async (userPrompt) => {
             step.model_request?.messages?.at(-1);
 
         if (latestMessage) {
+            const name = latestMessage.name;
             if (latestMessage.content) {
                 response = latestMessage.content;
             } else if (latestMessage.tool_calls) {
                 response = JSON.stringify(latestMessage.tool_calls)
             }
             console.log(`Step ${stepIndex}:`);
-            console.dir(latestMessage.content, { depth: null, colors: true })
+            console.dir(`Caller: ${name}: ${response}`, { depth: null, colors: true })
             console.log("\n"); // Quebra de linha
 
         }
