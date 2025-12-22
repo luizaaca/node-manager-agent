@@ -32,8 +32,6 @@ jobs:
             -x "*.git*" \
             -x "*.github*" \
             -x "*tests*" \
-            -x "*.db*" \
-            -x "*dev-start.js*"
         
         - name: Deploy to Azure Web App
           uses: azure/webapps-deploy@v2
